@@ -1,0 +1,21 @@
+const express = require('express')
+require('dotenv').config()
+const {connectDB} = require('./dbConfig')
+const productRoutes = require('./routes/productRoutes.js')
+
+const app = express()
+
+connectDB(process.env.MONGODB_URI)
+
+app.use(express.json())
+app.use('/products' , productRoutes)
+
+
+app.get('/' , (req , res)=>{
+    res.send('Hello from the Server')
+})
+
+
+app.listen(8081 , ()=>{
+    console.log(`Server Started`)
+})
